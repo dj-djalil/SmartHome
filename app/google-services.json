@@ -1,0 +1,188 @@
+{
+  "project_info": {
+    "project_number": "752184425769",
+    "firebase_url": "https://esp-iot-943f9-default-rtdb.firebaseio.com",
+    "project_id": "esp-iot-943f9",
+    "storage_bucket": "esp-iot-943f9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752184425769:android:bc98dd024db704d1074b38",
+        "android_client_info": {
+          "package_name": "com.example.home"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPabjfbOnjnQxrZcMy2-ju_B0_xEBGO1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752184425769:android:c2a3ec0b8977ed8b074b38",
+        "android_client_info": {
+          "package_name": "com.example.led_controle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752184425769-js49hlfum0rq94v95jdp9tt3ce4g370i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.led_controle",
+            "certificate_hash": "9177e261ec72e29dd2b7128dd2ce2a2c16d9efa3"
+          }
+        },
+        {
+          "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPabjfbOnjnQxrZcMy2-ju_B0_xEBGO1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752184425769:android:6d428ffe60856095074b38",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752184425769-3qvpiu5vjtog9padc7gr2ifqog5gadbm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.myapplication",
+            "certificate_hash": "9177e261ec72e29dd2b7128dd2ce2a2c16d9efa3"
+          }
+        },
+        {
+          "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPabjfbOnjnQxrZcMy2-ju_B0_xEBGO1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752184425769:android:59b67357daad42e4074b38",
+        "android_client_info": {
+          "package_name": "com.example.smart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752184425769-3rbk9fvkr9r0p4drg2afuk3m9bpdi7tb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smart",
+            "certificate_hash": "9177e261ec72e29dd2b7128dd2ce2a2c16d9efa3"
+          }
+        },
+        {
+          "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPabjfbOnjnQxrZcMy2-ju_B0_xEBGO1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752184425769:android:7b582cf1b7c1c78c074b38",
+        "android_client_info": {
+          "package_name": "com.example.smart_home"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752184425769-uvosg4tv6u6bhe3eq5obm2f37cjcm9hk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.smart_home",
+            "certificate_hash": "9177e261ec72e29dd2b7128dd2ce2a2c16d9efa3"
+          }
+        },
+        {
+          "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPabjfbOnjnQxrZcMy2-ju_B0_xEBGO1I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752184425769-fqqnomto4ujm59t1kvpv1ga95najct4b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
