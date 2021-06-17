@@ -41,7 +41,7 @@
              android:drawableEnd="@drawable/ic_door"
              />
 
-         
+
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -60,6 +60,8 @@
                  android:textColor="@color/black"
                  android:gravity="center"/>
              <Button
+                 android:id="@+id/G_open"
+                 android:onClick="openG"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
@@ -68,6 +70,8 @@
 
 
              <Button
+                 android:id="@+id/G_close"
+                 android:onClick="closeG"
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
@@ -143,6 +147,7 @@
                 android:src="@drawable/ic_temperature"
                 />
             <TextView
+                android:id="@+id/temperature"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Temp"
@@ -164,6 +169,7 @@
                 android:src="@drawable/ic_humidity"
                 />
             <TextView
+                android:id="@+id/Humidity"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Hum"
