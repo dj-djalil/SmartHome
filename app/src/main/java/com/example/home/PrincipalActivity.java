@@ -19,10 +19,16 @@ public class PrincipalActivity extends AppCompatActivity {
     TextView humidity ;
     Button openGarage;
     Button closeGarage;
+    Button fanAutoButton;
+    Button ledAutoButton;
     FirebaseDatabase database;
     DatabaseReference myRef_Temperature;
     DatabaseReference myRef_Humidity;
     DatabaseReference myRef_Garage;
+    DatabaseReference myRef_Ventilateur;
+    DatabaseReference myRef_Ventilateur_Auto;
+    DatabaseReference myRef_Led_Auto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +40,10 @@ public class PrincipalActivity extends AppCompatActivity {
         myRef_Temperature = database.getReference("Temperature/temp");
         myRef_Humidity = database.getReference("Temperature/humidity");
         myRef_Garage= database.getReference("Garage");
+        myRef_Ventilateur= database.getReference("Ventilateur/etat");
+        myRef_Ventilateur_Auto= database.getReference("Ventilateur/auto");
+        myRef_Led_Auto= database.getReference("Leds/led3_auto");
+
         // get text views temp and humidity
         temperature =(TextView)findViewById(R.id.temperature);
         humidity =(TextView)findViewById(R.id.Humidity);
@@ -83,5 +93,45 @@ public class PrincipalActivity extends AppCompatActivity {
     public void closeG (View view){
         openGarage =(Button)findViewById(R.id.G_close);
         myRef_Garage.setValue("0");
+    }
+    // Ventilateur
+    public void fanOff(View view) {
+   myRef_Ventilateur.setValue("0");
+    }
+
+    public void fanOn(View view) {
+        myRef_Ventilateur.setValue("1");
+
+    }
+
+    public void fanSetAuto(View view) {
+        fanAutoButton =(Button)findViewById(R.id.fanAutoButton);
+        String str=fanAutoButton.getText().toString();
+        if(str.equals("ON")){
+            fanAutoButton.setText("OFF");
+            fanAutoButton.setTextColor(getResources().getColor(R.color.close));
+            myRef_Ventilateur_Auto.setValue("0");
+
+        }else if(str.equals("OFF")){
+            fanAutoButton.setText("ON");
+            fanAutoButton.setTextColor(getResources().getColor(R.color.white));
+            myRef_Ventilateur_Auto.setValue("1");
+        }
+    }
+
+   // led auto Button
+    public void ledSetAuto(View view) {
+       ledAutoButton= (Button)findViewById(R.id.ledAutoButton);
+       String str=ledAutoButton.getText().toString();
+        if(str.equals("ON")){
+            ledAutoButton.setText("OFF");
+            ledAutoButton.setTextColor(getResources().getColor(R.color.close));
+            myRef_Led_Auto.setValue("0");
+
+        }else if(str.equals("OFF")){
+            ledAutoButton.setText("ON");
+            ledAutoButton.setTextColor(getResources().getColor(R.color.white));
+            myRef_Led_Auto.setValue("1");
+        }
     }
 }
