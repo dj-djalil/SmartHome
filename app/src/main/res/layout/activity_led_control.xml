@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:text="Home Lights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="36sp"
+            android:layout_marginBottom="30dp"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_light_image"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="30dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:text="BedRoom"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/bedRoomButton"
+                android:onClick="setBedRoomLight"
+                android:text="ON"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+               />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:text="Kitchen"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/kitchenButton"
+                android:text="ON"
+                android:textStyle="bold"
+                android:onClick="setKitchenLight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:text="Corridor"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/corridorButton"
+                android:onClick="setCorridorLight"
+                android:text="ON"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp">
+
+            <TextView
+                android:text="Garage"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/garageButton"
+                android:onClick="setGarageLight"
+                android:text="ON"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
