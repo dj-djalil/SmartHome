@@ -49,6 +49,10 @@ public class PrincipalActivity extends AppCompatActivity {
         temperature =(TextView)findViewById(R.id.temperature);
         humidity =(TextView)findViewById(R.id.Humidity);
 
+        // get Buttons
+        ledAutoButton = (Button)findViewById(R.id.ledAutoButton);
+        fanAutoButton = (Button)findViewById(R.id.fanAutoButton);
+
         myRef_Temperature.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,18 +85,60 @@ public class PrincipalActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        myRef_Ventilateur_Auto.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if(value.equals("1")){
+                    fanAutoButton.setText("ON");
+                    fanAutoButton.setTextColor(getResources().getColor(R.color.white));
+                }else if(value.equals("0")){
+                    fanAutoButton.setText("OFF");
+                    fanAutoButton.setTextColor(getResources().getColor(R.color.close));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
+
+
+        myRef_Led_Auto.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if(value.equals("1")){
+                    ledAutoButton.setText("ON");
+                    ledAutoButton.setTextColor(getResources().getColor(R.color.white));
+                }else if(value.equals("0")){
+                     ledAutoButton.setText("OFF");
+                    ledAutoButton.setTextColor(getResources().getColor(R.color.close));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
+
     }
 
 
     // open garage
     public void openG (View view){
-        openGarage =(Button)findViewById(R.id.G_open);
         myRef_Garage.setValue("1");
     }
 
     // close garage
     public void closeG (View view){
-        openGarage =(Button)findViewById(R.id.G_close);
         myRef_Garage.setValue("0");
     }
     // Ventilateur
@@ -106,7 +152,6 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void fanSetAuto(View view) {
-        fanAutoButton =(Button)findViewById(R.id.fanAutoButton);
         String str=fanAutoButton.getText().toString();
         if(str.equals("ON")){
             fanAutoButton.setText("OFF");
@@ -122,8 +167,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
    // led auto Button
     public void ledSetAuto(View view) {
-       ledAutoButton= (Button)findViewById(R.id.ledAutoButton);
-       String str=ledAutoButton.getText().toString();
+        String str=ledAutoButton.getText().toString();
         if(str.equals("ON")){
             ledAutoButton.setText("OFF");
             ledAutoButton.setTextColor(getResources().getColor(R.color.close));
