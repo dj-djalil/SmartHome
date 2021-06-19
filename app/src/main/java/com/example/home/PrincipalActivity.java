@@ -140,4 +140,9 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = new Intent(this,LedControlActivity.class);
         startActivity(intent);
     }
+
+    public void portesButton(View view) {
+        Intent intent = new Intent(this,controlePortesActivity.class);
+        startActivity(intent);
+    }
 }
