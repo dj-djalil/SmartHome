@@ -1,8 +1,15 @@
 package com.example.home;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +36,7 @@ public class PrincipalActivity extends AppCompatActivity {
     DatabaseReference myRef_Ventilateur;
     DatabaseReference myRef_Ventilateur_Auto;
     DatabaseReference myRef_Led_Auto;
+    DatabaseReference myRef_gaz_leak;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +45,16 @@ public class PrincipalActivity extends AppCompatActivity {
           // Instance of data base
         database = FirebaseDatabase.getInstance();
 
-        // get temperature and humidity from firebase
+        // get data from firebase
         myRef_Temperature = database.getReference("Temperature/temp");
         myRef_Humidity = database.getReference("Temperature/humidity");
         myRef_Garage= database.getReference("Garage");
         myRef_Ventilateur= database.getReference("Ventilateur/etat");
         myRef_Ventilateur_Auto= database.getReference("Ventilateur/auto");
         myRef_Led_Auto= database.getReference("Leds/led3_auto");
+        myRef_gaz_leak= database.getReference("Gaz/fuite");
+
+
 
         // get text views temp and humidity
         temperature =(TextView)findViewById(R.id.temperature);
@@ -129,6 +140,22 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
 
+        // Notification
+        myRef_gaz_leak.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange( DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if(value.equals("1")){
+                    notification();
+                }
+            }
+
+            @Override
+            public void onCancelled( DatabaseError error) {
+              // nothing
+            }
+        });
+
     }
 
 
@@ -188,5 +215,22 @@ public class PrincipalActivity extends AppCompatActivity {
     public void portesButton(View view) {
         Intent intent = new Intent(this,controlePortesActivity.class);
         startActivity(intent);
+    }
+
+
+    private void notification(){
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
+            NotificationChannel channel = new NotificationChannel("n","n", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"n")
+                .setContentTitle(" Smart House Warning ")
+                .setSmallIcon(R.drawable.ic_notification)
+                .setAutoCancel(true)
+                .setContentText(" There is a danger of a  Gaz Leak ")
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
+        managerCompat.notify(999, builder.build());
     }
 }
