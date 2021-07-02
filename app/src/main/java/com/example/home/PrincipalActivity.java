@@ -25,8 +25,9 @@ public class PrincipalActivity extends AppCompatActivity {
 
     TextView temperature;
     TextView humidity ;
-    Button openGarage;
-    Button closeGarage;
+    Button garageControlButton;
+//    Button openGarage;
+//    Button closeGarage;
     Button fanAutoButton;
     Button ledAutoButton;
     FirebaseDatabase database;
@@ -63,6 +64,7 @@ public class PrincipalActivity extends AppCompatActivity {
         // get Buttons
         ledAutoButton = (Button)findViewById(R.id.ledAutoButton);
         fanAutoButton = (Button)findViewById(R.id.fanAutoButton);
+        garageControlButton  = (Button)findViewById(R.id.garageControlButton);
 
         myRef_Temperature.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,7 +72,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 Float value = dataSnapshot.getValue(Float.class);
-                temperature.setText(value+ "");
+                temperature.setText(value+ " °C");
 
             }
 
@@ -86,7 +88,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 Float value = dataSnapshot.getValue(Float.class);
-                humidity.setText(value+ "");
+                humidity.setText(value+ " %");
 
             }
 
@@ -140,6 +142,24 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
 
+        myRef_Garage.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if(value.equals("1")){
+                    garageControlButton.setText("OPEN");
+                    garageControlButton.setTextColor(getResources().getColor(R.color.white));
+                }else if(value.equals("0")){
+                    garageControlButton.setText("CLOSE");
+                    garageControlButton.setTextColor(getResources().getColor(R.color.close));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
         // Notification
         myRef_gaz_leak.addValueEventListener(new ValueEventListener() {
             @Override
@@ -160,23 +180,23 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
     // open garage
-    public void openG (View view){
-        myRef_Garage.setValue("1");
-    }
-
-    // close garage
-    public void closeG (View view){
-        myRef_Garage.setValue("0");
-    }
+//    public void openG (View view){
+//        myRef_Garage.setValue("1");
+//    }
+//
+//    // close garage
+//    public void closeG (View view){
+//        myRef_Garage.setValue("0");
+//    }
     // Ventilateur
-    public void fanOff(View view) {
-   myRef_Ventilateur.setValue("0");
-    }
-
-    public void fanOn(View view) {
-        myRef_Ventilateur.setValue("1");
-
-    }
+//    public void fanOff(View view) {
+//   myRef_Ventilateur.setValue("0");
+//    }
+//
+//    public void fanOn(View view) {
+//        myRef_Ventilateur.setValue("1");
+//
+//    }
 
     public void fanSetAuto(View view) {
         String str=fanAutoButton.getText().toString();
@@ -216,7 +236,15 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = new Intent(this,controlePortesActivity.class);
         startActivity(intent);
     }
+    public void fanButton(View view) {
+        Intent intent = new Intent(this,FanActivity.class);
+        startActivity(intent);
+    }
 
+    public void getAlarmActivity(View view) {
+        Intent intent = new Intent(this,GasAlarmActivity.class);
+        startActivity(intent);
+    }
 
     private void notification(){
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
@@ -232,5 +260,20 @@ public class PrincipalActivity extends AppCompatActivity {
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(this);
         managerCompat.notify(999, builder.build());
+    }
+
+
+    public void setGarageEtat(View view) {
+        String str=garageControlButton.getText().toString();
+        if(str.equals("OPEN")){
+            garageControlButton.setText("CLOSE");
+            garageControlButton.setTextColor(getResources().getColor(R.color.close));
+            myRef_Garage.setValue("0");
+
+        }else if(str.equals("CLOSE")){
+            garageControlButton.setText("OPEN");
+            garageControlButton.setTextColor(getResources().getColor(R.color.white));
+            myRef_Garage.setValue("1");
+        }
     }
 }
