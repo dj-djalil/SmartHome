@@ -24,12 +24,11 @@ import com.google.firebase.database.ValueEventListener;
 public class PrincipalActivity extends AppCompatActivity {
 
     TextView temperature;
-    TextView humidity ;
+    TextView humidity;
     Button garageControlButton;
-//    Button openGarage;
-//    Button closeGarage;
     Button fanAutoButton;
     Button ledAutoButton;
+    Button plugButton;
     FirebaseDatabase database;
     DatabaseReference myRef_Temperature;
     DatabaseReference myRef_Humidity;
@@ -38,33 +37,35 @@ public class PrincipalActivity extends AppCompatActivity {
     DatabaseReference myRef_Ventilateur_Auto;
     DatabaseReference myRef_Led_Auto;
     DatabaseReference myRef_gaz_leak;
+    DatabaseReference myRef_plug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-          // Instance of data base
+        // Instance of data base
         database = FirebaseDatabase.getInstance();
 
         // get data from firebase
         myRef_Temperature = database.getReference("Temperature/temp");
         myRef_Humidity = database.getReference("Temperature/humidity");
-        myRef_Garage= database.getReference("Garage");
-        myRef_Ventilateur= database.getReference("Ventilateur/etat");
-        myRef_Ventilateur_Auto= database.getReference("Ventilateur/auto");
-        myRef_Led_Auto= database.getReference("Leds/led3_auto");
-        myRef_gaz_leak= database.getReference("Gaz/fuite");
-
+        myRef_Garage = database.getReference("Garage");
+        myRef_Ventilateur = database.getReference("Ventilateur/etat");
+        myRef_Ventilateur_Auto = database.getReference("Ventilateur/auto");
+        myRef_Led_Auto = database.getReference("Leds/led3_auto");
+        myRef_gaz_leak = database.getReference("Gaz/fuite");
+        myRef_plug = database.getReference("prisesConnectees/prise01");
 
 
         // get text views temp and humidity
-        temperature =(TextView)findViewById(R.id.temperature);
-        humidity =(TextView)findViewById(R.id.Humidity);
+        temperature = (TextView) findViewById(R.id.temperature);
+        humidity = (TextView) findViewById(R.id.Humidity);
 
         // get Buttons
-        ledAutoButton = (Button)findViewById(R.id.ledAutoButton);
-        fanAutoButton = (Button)findViewById(R.id.fanAutoButton);
-        garageControlButton  = (Button)findViewById(R.id.garageControlButton);
+        ledAutoButton = (Button) findViewById(R.id.ledAutoButton);
+        fanAutoButton = (Button) findViewById(R.id.fanAutoButton);
+        garageControlButton = (Button) findViewById(R.id.garageControlButton);
+        plugButton = (Button) findViewById(R.id.pugButton);
 
         myRef_Temperature.addValueEventListener(new ValueEventListener() {
             @Override
@@ -72,14 +73,14 @@ public class PrincipalActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 Float value = dataSnapshot.getValue(Float.class);
-                temperature.setText(value+ " °C");
+                temperature.setText(value + " °C");
 
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                }
+            }
         });
 
         myRef_Humidity.addValueEventListener(new ValueEventListener() {
@@ -88,7 +89,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 Float value = dataSnapshot.getValue(Float.class);
-                humidity.setText(value+ " %");
+                humidity.setText(value + " %");
 
             }
 
@@ -100,15 +101,14 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
 
-
         myRef_Ventilateur_Auto.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if(value.equals("1")){
+                if (value.equals("1")) {
                     fanAutoButton.setText("ON");
                     fanAutoButton.setTextColor(getResources().getColor(R.color.white));
-                }else if(value.equals("0")){
+                } else if (value.equals("0")) {
                     fanAutoButton.setText("OFF");
                     fanAutoButton.setTextColor(getResources().getColor(R.color.close));
                 }
@@ -121,16 +121,15 @@ public class PrincipalActivity extends AppCompatActivity {
         });
 
 
-
         myRef_Led_Auto.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if(value.equals("1")){
+                if (value.equals("1")) {
                     ledAutoButton.setText("ON");
                     ledAutoButton.setTextColor(getResources().getColor(R.color.white));
-                }else if(value.equals("0")){
-                     ledAutoButton.setText("OFF");
+                } else if (value.equals("0")) {
+                    ledAutoButton.setText("OFF");
                     ledAutoButton.setTextColor(getResources().getColor(R.color.close));
                 }
 
@@ -146,10 +145,10 @@ public class PrincipalActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if(value.equals("1")){
+                if (value.equals("1")) {
                     garageControlButton.setText("OPEN");
                     garageControlButton.setTextColor(getResources().getColor(R.color.white));
-                }else if(value.equals("0")){
+                } else if (value.equals("0")) {
                     garageControlButton.setText("CLOSE");
                     garageControlButton.setTextColor(getResources().getColor(R.color.close));
                 }
@@ -163,18 +162,39 @@ public class PrincipalActivity extends AppCompatActivity {
         // Notification
         myRef_gaz_leak.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange( DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                if(value.equals("1")){
+                if (value.equals("1")) {
                     notification();
                 }
             }
 
             @Override
-            public void onCancelled( DatabaseError error) {
-              // nothing
+            public void onCancelled(DatabaseError error) {
+                // nothing
             }
         });
+
+        // plug
+        myRef_plug.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String value = dataSnapshot.getValue(String.class);
+                if (value.equals("1")) {
+                    plugButton.setText("Active");
+                    plugButton.setTextColor(getResources().getColor(R.color.white));
+                } else if (value.equals("0")) {
+                    plugButton.setText("Disable");
+                    plugButton.setTextColor(getResources().getColor(R.color.close));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
+        });
+
 
     }
 
@@ -199,28 +219,28 @@ public class PrincipalActivity extends AppCompatActivity {
 //    }
 
     public void fanSetAuto(View view) {
-        String str=fanAutoButton.getText().toString();
-        if(str.equals("ON")){
+        String str = fanAutoButton.getText().toString();
+        if (str.equals("ON")) {
             fanAutoButton.setText("OFF");
             fanAutoButton.setTextColor(getResources().getColor(R.color.close));
             myRef_Ventilateur_Auto.setValue("0");
 
-        }else if(str.equals("OFF")){
+        } else if (str.equals("OFF")) {
             fanAutoButton.setText("ON");
             fanAutoButton.setTextColor(getResources().getColor(R.color.white));
             myRef_Ventilateur_Auto.setValue("1");
         }
     }
 
-   // led auto Button
+    // led auto Button
     public void ledSetAuto(View view) {
-        String str=ledAutoButton.getText().toString();
-        if(str.equals("ON")){
+        String str = ledAutoButton.getText().toString();
+        if (str.equals("ON")) {
             ledAutoButton.setText("OFF");
             ledAutoButton.setTextColor(getResources().getColor(R.color.close));
             myRef_Led_Auto.setValue("0");
 
-        }else if(str.equals("OFF")){
+        } else if (str.equals("OFF")) {
             ledAutoButton.setText("ON");
             ledAutoButton.setTextColor(getResources().getColor(R.color.white));
             myRef_Led_Auto.setValue("1");
@@ -228,31 +248,32 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void ledsControl(View view) {
-        Intent intent = new Intent(this,LedControlActivity.class);
+        Intent intent = new Intent(this, LedControlActivity.class);
         startActivity(intent);
     }
 
     public void portesButton(View view) {
-        Intent intent = new Intent(this,controlePortesActivity.class);
+        Intent intent = new Intent(this, controlePortesActivity.class);
         startActivity(intent);
     }
+
     public void fanButton(View view) {
-        Intent intent = new Intent(this,FanActivity.class);
+        Intent intent = new Intent(this, FanActivity.class);
         startActivity(intent);
     }
 
     public void getAlarmActivity(View view) {
-        Intent intent = new Intent(this,GasAlarmActivity.class);
+        Intent intent = new Intent(this, GasAlarmActivity.class);
         startActivity(intent);
     }
 
-    private void notification(){
-        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            NotificationChannel channel = new NotificationChannel("n","n", NotificationManager.IMPORTANCE_DEFAULT);
+    private void notification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("n", "n", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"n")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "n")
                 .setContentTitle(" Smart House Warning ")
                 .setSmallIcon(R.drawable.ic_notification)
                 .setAutoCancel(true)
@@ -264,16 +285,31 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
     public void setGarageEtat(View view) {
-        String str=garageControlButton.getText().toString();
-        if(str.equals("OPEN")){
+        String str = garageControlButton.getText().toString();
+        if (str.equals("OPEN")) {
             garageControlButton.setText("CLOSE");
             garageControlButton.setTextColor(getResources().getColor(R.color.close));
             myRef_Garage.setValue("0");
 
-        }else if(str.equals("CLOSE")){
+        } else if (str.equals("CLOSE")) {
             garageControlButton.setText("OPEN");
             garageControlButton.setTextColor(getResources().getColor(R.color.white));
             myRef_Garage.setValue("1");
+        }
+    }
+
+    public void setPlugEtat(View view) {
+
+        String str = plugButton.getText().toString();
+        if (str.equals("Active")) {
+            plugButton.setText("Disable");
+            plugButton.setTextColor(getResources().getColor(R.color.close));
+            myRef_plug.setValue("0");
+
+        } else if (str.equals("Disable")) {
+            plugButton.setText("Active");
+            plugButton.setTextColor(getResources().getColor(R.color.white));
+            myRef_plug.setValue("1");
         }
     }
 }

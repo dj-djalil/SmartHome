@@ -120,7 +120,7 @@
              android:layout_marginTop="0dp"
              android:layout_marginLeft="20dp"
              android:layout_marginRight="20dp"
-             android:layout_marginBottom="30dp">
+             android:layout_marginBottom="0dp">
              <TextView
                  android:layout_width="0dp"
                  android:layout_height="wrap_content"
@@ -128,26 +128,7 @@
                  android:text="Garage"
                  android:textSize="20dp"
                  android:textStyle="bold"
-
                  android:gravity="center"/>
-<!--             <Button-->
-<!--                 android:id="@+id/G_open"-->
-<!--                 android:onClick="openG"-->
-<!--                 android:layout_width="0dp"-->
-<!--                 android:layout_height="wrap_content"-->
-<!--                 android:layout_weight="1"-->
-<!--                 android:text="Open"-->
-<!--                 android:layout_marginLeft="20dp"/>-->
-
-
-<!--             <Button-->
-<!--                 android:id="@+id/G_close"-->
-<!--                 android:onClick="closeG"-->
-<!--                 android:layout_width="0dp"-->
-<!--                 android:layout_height="wrap_content"-->
-<!--                 android:layout_weight="1"-->
-<!--                 android:text="Close"-->
-<!--                 android:layout_marginLeft="20dp"/>-->
 
              <Button
                  android:id="@+id/garageControlButton"
@@ -156,6 +137,33 @@
                  android:layout_height="wrap_content"
                  android:layout_weight="1"
                  android:text="Close"
+                 android:textStyle="bold"
+                 />
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_marginTop="0dp"
+             android:layout_marginLeft="20dp"
+             android:layout_marginRight="20dp"
+             android:layout_marginBottom="10dp">
+             <TextView
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:text="Plug"
+                 android:textSize="20dp"
+                 android:textStyle="bold"
+                 android:gravity="center"/>
+
+             <Button
+                 android:id="@+id/pugButton"
+                 android:onClick="setPlugEtat"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_weight="1"
+                 android:text="Active"
                  android:textStyle="bold"
                  />
          </LinearLayout>
